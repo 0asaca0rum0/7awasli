@@ -17,21 +17,25 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
+
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
 
   if (!loaded) {
+
     return null;
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+		<ThemeProvider value={colorScheme === "dark" ? DarkTheme  : DefaultTheme }>
+			<Stack initialRouteName='(login)'>
+				<Stack.Screen name="(signup)/index" options={{ headerShown: false }} />
+        <Stack.Screen name="(login)/index" options={{ headerShown: false }} />
+		
+			<Stack.Screen name="+not-found" />
+			</Stack>
+		</ThemeProvider>
+	);
 }
