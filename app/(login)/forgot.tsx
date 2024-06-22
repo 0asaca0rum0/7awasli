@@ -10,8 +10,12 @@ import {
 
 import { Link } from "expo-router";
 import React, { useState } from "react";
-
+import { Ionicons } from "@expo/vector-icons";
 export default function forgot() {
+    const [disabled, setdisabled] = useState(true);
+    const handledisabled = () => {
+        setdisabled(false)
+    }
 	return (
 		<KeyboardAvoidingView className="w-full h-full flex-1 justify-center items-center ">
 			<ImageBackground
@@ -25,10 +29,20 @@ export default function forgot() {
 							className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80"
 							placeholder="email or phone number "
 						/>
-						<Pressable className="bg-primary w-3/4 rounded-full border-[1px] h-12 justify-center items-center shadow-lg shadow-black/80">
-							<Text className="text-2xl text-white"> send code </Text>
+						<View className=" flex-row-reverse items-center justify-center bg-white rounded-full w-3/4  h-12   shadow-lg shadow-black/80">
+							<Pressable className=" w-1/3 bg-gray-100 border-2 border-l-0 h-full justify-center items-center px-2 rounded-r-full" onPress={handledisabled}>
+                                            <Text>send code </Text>
+							</Pressable>
+							<TextInput className="w-2/3 px-4 border-2  border-r-[1px] h-full bg-white rounded-l-full border-black" placeholder={"code "} />
+						</View>
+						<Pressable
+							className={` w-3/4 rounded-full border-[1px] h-12 justify-center items-center shadow-lg shadow-black/80  ${
+								disabled ? "bg-gray-500" : "bg-primary"
+							}`}
+							disabled={disabled}
+						>
+							<Text className="text-2xl text-white"> reset password </Text>
 						</Pressable>
-						
 					</View>
 
 					<View className="w-full  items-center justify-start h-1/5 ">
