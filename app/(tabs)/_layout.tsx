@@ -26,11 +26,19 @@ const _layout = () => {
 
 			<Tabs.Screen
 				name="map"
-
+				options={{
+					title: "Map",
+					headerTitleAlign: "center",
+					
+				}}
 			/>
 			<Tabs.Screen
 				name="profile"
-
+				options={{
+					title: "Profile",
+					headerTitleAlign: "center",
+					
+				}}
 			/>
 		</Tabs>
 	);

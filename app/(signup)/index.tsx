@@ -48,7 +48,7 @@ export default function signupScreen() {
 				<View className=" w-full h-2/3  justify-start  items-center space-y-8 ">
 					<TextInput
 						id=" full name"
-						className="bg-white rounded-full w-3/4   border-black border-2 h-12  p-3 shadow-lg shadow-black/80 "
+						className="bg-white rounded-full w-3/4     h-12  p-3 shadow-lg shadow-black/80 "
 						placeholder="full name "
 						inputMode="text"
 						value={fullname}
@@ -57,7 +57,7 @@ export default function signupScreen() {
 
 					<TextInput
 						id="email"
-						className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80 "
+						className="bg-white rounded-full w-3/4   h-12  p-3 shadow-lg shadow-black/80 "
 						placeholder="email"
 						inputMode="email"
 						value={email}
@@ -65,7 +65,7 @@ export default function signupScreen() {
 					/>
 					<TextInput
 						id="email"
-						className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80 "
+						className="bg-white rounded-full w-3/4   h-12  p-3 shadow-lg shadow-black/80 "
 						placeholder="number"
 						inputMode="numeric"
 						value={number}
@@ -73,7 +73,7 @@ export default function signupScreen() {
 					/>
 					<TextInput
 						id="password"
-						className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80"
+						className="bg-white rounded-full w-3/4   h-12  p-3 shadow-lg shadow-black/80"
 						placeholder="password"
 						secureTextEntry={true}
 						inlineImageLeft=""
@@ -82,7 +82,7 @@ export default function signupScreen() {
 					/>
 					<TextInput
 						id="password confermation"
-						className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80"
+						className="bg-white rounded-full w-3/4   h-12  p-3 shadow-lg shadow-black/80"
 						placeholder="confirm password"
 						secureTextEntry={true}
 						inlineImageLeft=""
@@ -90,7 +90,7 @@ export default function signupScreen() {
 						onChangeText={handleConfirmPassword}
 					/>
 					<Pressable
-						className="bg-primary  w-3/4 rounded-full border-[1px]  h-12 justify-center items-center shadow-lg shadow-black/80"
+						className="bg-primary  w-3/4 rounded-full   h-12 justify-center items-center shadow-lg shadow-black/80"
 						onPress={handlepress}
 					>
 						<Text className="text-2xl text-white"> sign up </Text>

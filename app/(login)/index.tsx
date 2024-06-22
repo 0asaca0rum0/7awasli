@@ -34,20 +34,20 @@ return (
 				<View className="w-full  h-4/5 justify-evenly mt-5 items-center space-y-2 ">
 					<TextInput
 						id="email"
-						className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80 "
+						className="bg-white rounded-full w-3/4   h-12  p-3 shadow-lg shadow-black/80 "
 						onFocus={handlePlaceholder}
 						placeholder={placeholder}
 						inputMode="email"
 					/>
 					<TextInput
 						id="password"
-						className="bg-white rounded-full w-3/4 border-black border-2 h-12  p-3 shadow-lg shadow-black/80"
+						className="bg-white rounded-full w-3/4   h-12  p-3 shadow-lg shadow-black/80"
 						onFocus={handlePassword}
 						placeholder={password}
 						secureTextEntry={true}
 						inlineImageLeft="iconr.png"
 					/>
-					<Pressable className="bg-primary w-3/4 rounded-full border-[1px] h-12 justify-center items-center shadow-lg shadow-black/80">
+					<Pressable className="bg-primary w-3/4 rounded-full  h-12 justify-center items-center shadow-lg shadow-black/80">
 						<Text className="text-2xl text-white"> login </Text>
 					</Pressable>
 

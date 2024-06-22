@@ -4,6 +4,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { PaperProvider } from "react-native-paper";
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -29,32 +30,37 @@ export default function RootLayout() {
   }
 
   return (
-		<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme} >
-			<Stack initialRouteName="(login)/index">
-				<Stack.Screen
-					name="(signup)/index"
-					options={{ headerShown: false, statusBarTranslucent: true }}
-				/>
-				<Stack.Screen
-					name="(login)/index"
-					options={{ headerShown: false, statusBarTranslucent: true  }}
-				/>
-				<Stack.Screen
-					name="(login)/forgot"
-					options={{
-						headerShown: true,
-						headerTransparent: true,
-						title: "",
-						statusBarTranslucent: true,
+		<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+			<PaperProvider>
+				<Stack initialRouteName="(login)/index">
+					<Stack.Screen
+						name="(signup)/index"
+						options={{ headerShown: false, statusBarTranslucent: true }}
+					/>
+					<Stack.Screen
+						name="(login)/index"
+						options={{ headerShown: false, statusBarTranslucent: true }}
+					/>
+					<Stack.Screen
+						name="(login)/forgot"
+						options={{
+							headerShown: true,
+							headerTransparent: true,
+							title: "",
+							statusBarTranslucent: true,
 
-						headerTintColor: "#1bcf43",
-					}}
-				/>
+							headerTintColor: "#1bcf43",
+						}}
+					/>
 
-				<Stack.Screen name="(tabs)" options={{ headerShown: false ,statusBarTranslucent:true}} />
+					<Stack.Screen
+						name="(tabs)"
+						options={{ headerShown: false, statusBarTranslucent: true }}
+					/>
 
-				<Stack.Screen name="+not-found" />
-			</Stack>
+					<Stack.Screen name="+not-found" />
+				</Stack>
+			</PaperProvider>
 		</ThemeProvider>
 	);
 }

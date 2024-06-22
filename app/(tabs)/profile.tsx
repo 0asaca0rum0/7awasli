@@ -3,9 +3,9 @@ import React from 'react'
 
 export default function profile() {
   return (
-    <View>
-      <Text>profile</Text>
-    </View>
-  )
+		<View className="flex-1 bg-white w-full h-full justify-center items-center">
+			<Text className='text-5xl'>profile</Text>
+		</View>
+	);
 }
 
