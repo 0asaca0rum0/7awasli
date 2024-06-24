@@ -89,7 +89,7 @@ export default function MyTabBar({ state, descriptors, navigation }: any) {
 const styles = StyleSheet.create({
 	tabBar: {
 		flexDirection: "row",
-		backgroundColor: "#fff",
+		backgroundColor: "#FAFAFA",
 		position: "absolute",
 		bottom: 20,
 		width: "95%",
@@ -108,5 +108,4 @@ const styles = StyleSheet.create({
 		elevation: 8,
 		padding: 8,
 	},
-
 });

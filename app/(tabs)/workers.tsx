@@ -46,7 +46,7 @@ export default function Workers() {
 					right={<TextInput.Icon icon={icon} />}
 					placeholderTextColor={"#EFEFEF"}
 				/>
-				<Text style={styles.text}>map</Text>
+				<Text style={styles.text}>freelance</Text>
 			</View>
 		</TouchableWithoutFeedback>
 	);

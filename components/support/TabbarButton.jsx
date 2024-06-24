@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, Pressable } from "react-native";
 import React, { useEffect } from 'react'
-import { AntDesign, FontAwesome, FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, FontAwesome5, FontAwesome6, Ionicons } from "@expo/vector-icons";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 
 const TabbarButton = ({ ...props }) => {
@@ -11,7 +11,7 @@ const TabbarButton = ({ ...props }) => {
             <AntDesign name="home" size={24} color="black" {...props} />
         ),
         map: (props) => (
-            <FontAwesome5 name="map" size={24} color="black" {...props} />
+            <FontAwesome5 name="map"  size={24} color="black" {...props} />
         ),
         profile: (props) => (
             <FontAwesome5 name="user" size={24} color="black" {...props} />
@@ -19,22 +19,37 @@ const TabbarButton = ({ ...props }) => {
         settings: (props) => (
             <FontAwesome6 name="cog" size={24} color="black" {...props} />
         ),
+        workers: (props) => (
+            <Ionicons name="briefcase-outline" size={24} color="black" {...props} />
+        ),
     };
     useEffect(() => {
         scale.value = withSpring(typeof isFocused === "boolean" ? (isFocused ? 1 : 0) : 0, { duration: 500 });
     }, [scale, isFocused]);
     const animatedStyle = useAnimatedStyle(() => {
-        const scaleValue = interpolate(scale.value, [0, 1], [0.8, 1.4]);
-        const top = interpolate(scale.value, [0, 1], [0, 8]);
-
+        const scaleValue = interpolate(scale.value, [0, 1], [0.9, 1.4]);
+        const top = interpolate(scale.value, [0, 1], [0, 10]);
+        const padding = interpolate(scale.value, [0, 1], [0, 2]);
+        const width = interpolate(scale.value, [0, 1], [26, 45]);
         return {
             transform: [{ scale: scaleValue }],
-            top};
+            top,
+            width,
+            backgroundColor: isFocused ? "#EFEFEF" : "white",
+            borderRadius: 16,
+            padding,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            
+
+
+        };
     });
     const animatedStyle2 = useAnimatedStyle(() => {
         const opacity = interpolate(scale.value, [0, 1], [1, 0]);
         return {
-            opacity
+            opacity,
         };
     });
     return (

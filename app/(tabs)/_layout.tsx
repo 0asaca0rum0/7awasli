@@ -17,7 +17,6 @@ const _layout = () => {
 					headerShown: false,
 				}}
 			/>
-
 			<Tabs.Screen
 				name="map"
 				options={{
@@ -28,9 +27,19 @@ const _layout = () => {
 				}}
 			/>
 			<Tabs.Screen
+				name="workers"
+				options={{
+					title: "workers",
+					headerShown: false,
+
+					headerTitleAlign: "center",
+				}}
+			/>
+			<Tabs.Screen
 				name="profile"
 				options={{
 					title: "Profile",
+					headerShown: false,
 
 					headerTitleAlign: "center",
 				}}

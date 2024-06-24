@@ -11,9 +11,9 @@ import {
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function inputwithicon({ icon,size, placeholder,className2 ,color} ) {
+export default function Inputwithicon({ icon,size, placeholder,className2 ,color} ) {
 	return (
-		<View className='w-full h-full bg-red-800' >
+		<View className={'relative top-0 w-full h-full bg-red-800 '} >
 			<Pressable>
 				<Ionicons name={icon} color={"black"} size={size} className="" />
 			</Pressable>
