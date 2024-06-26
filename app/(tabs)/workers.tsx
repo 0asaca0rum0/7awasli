@@ -8,6 +8,7 @@ import {
 import React from "react";
 import { TextInput } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Workers() {
 	const [isFocused, setIsFocused] = React.useState(false);
@@ -18,41 +19,43 @@ export default function Workers() {
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<View style={styles.container}>
-				<View style={styles.input2}>
-					<TextInput
-						label="search"
-						mode="outlined"
-						outlineColor="black"
-						outlineStyle={{
-							borderWidth: isFocused ? 1 : 0,
-							borderColor: isFocused ? "#1bcf43" : "#000",
-							borderCurve: "continuous",
-							borderRadius: 200,
-							shadowColor: "#000",
-							shadowOffset: {
-								width: 4,
-								height: 2,
-							},
-							shadowOpacity: 1,
-							shadowRadius: 3.84,
-							elevation: 5,
-						}}
-						activeOutlineColor="#1bcf43"
-						onFocus={handleFocus}
-						onBlur={handleBlur}
-						style={styles.input}
-						placeholderTextColor={"#EFEFEF"}
-					/>
-					<Ionicons
-						name="search"
-						size={24}
-						color={isFocused ? "#1bcf43" : "grey"}
-						style={{ position: "absolute", right: 25 , bottom: 32}}
-					/>
+			<SafeAreaView style={styles.container}>
+				<View style={styles.container}>
+					<View style={styles.input2}>
+						<TextInput
+							label="search"
+							mode="outlined"
+							outlineColor="black"
+							outlineStyle={{
+								borderWidth: isFocused ? 1 : 0,
+								borderColor: isFocused ? "#1bcf43" : "#000",
+								borderCurve: "continuous",
+								borderRadius: 200,
+								shadowColor: "#000",
+								shadowOffset: {
+									width: 4,
+									height: 2,
+								},
+								shadowOpacity: 1,
+								shadowRadius: 3.84,
+								elevation: 5,
+							}}
+							activeOutlineColor="#1bcf43"
+							onFocus={handleFocus}
+							onBlur={handleBlur}
+							style={styles.input}
+							placeholderTextColor={"#EFEFEF"}
+						/>
+						<Ionicons
+							name="search"
+							size={24}
+							color={isFocused ? "#1bcf43" : "grey"}
+							style={{ position: "absolute", right: 25, bottom: 32 }}
+						/>
+					</View>
+					<Text style={styles.text}>freelance</Text>
 				</View>
-				<Text style={styles.text}>freelance</Text>
-			</View>
+			</SafeAreaView>
 		</TouchableWithoutFeedback>
 	);
 }
