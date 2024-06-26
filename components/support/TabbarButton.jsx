@@ -30,7 +30,7 @@ const TabbarButton = ({ ...props }) => {
         const scaleValue = interpolate(scale.value, [0, 1], [0.9, 1.4]);
         const top = interpolate(scale.value, [0, 1], [0, 10]);
         const padding = interpolate(scale.value, [0, 1], [0, 2]);
-        const width = interpolate(scale.value, [0, 1], [26, 45]);
+        const width = interpolate(scale.value, [0, 1], [30, 50]);
         return {
             transform: [{ scale: scaleValue }],
             top,

@@ -1,19 +1,15 @@
 import {
 	View,
 	Text,
-	Pressable,
 	ImageBackground,
 	TextInput,
 	KeyboardAvoidingView,
-	Image,
 } from "react-native";
-import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import { Button } from "react-native-paper";
 
 
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
 export default function forgot() {
     const [disabled, setdisabled] = useState(true);
     const handledisabled = () => {
