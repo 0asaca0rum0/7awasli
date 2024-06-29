@@ -5,120 +5,138 @@ import {
 	TouchableWithoutFeedback,
 	Keyboard,
 	ScrollView,
+	Pressable,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { TextInput } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Worker2 from "@/components/support/worker";
+import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 
 const DATA = [
 	{
-		id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-		title: "First Item",
+		id: "1a2b3c4d5e6f",
+		username: "johnsmith",
+		email: "johnsmith@gmail.com",
+		rating: 4.5,
+		number: "+1234567890",
 	},
 	{
-		id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-		title: "Second Item",
+		id: "2b3c4d5e6f7g",
+		username: "emilyjones",
+		email: "emilyjones@yahoo.com",
+		rating: 4.0,
+		number: "+1234567891",
 	},
 	{
-		id: "58694a0f-3da1-471f-bd96-145571e29d72",
-		title: "Third Item",
+		id: "3c4d5e6f7g8h",
+		username: "michaelbrown",
+		email: "michaelbrown@protonmail.com",
+		rating: 4.7,
+		number: "+1234567892",
 	},
 	{
-		id: "58694af-3da1-471f-bd96-145571e29d72",
-		title: "Third Item",
+		id: "4d5e6f7g8h9i",
+		username: "sarahwilson",
+		email: "sarahwilson@gmail.com",
+		rating: 3.8,
+		number: "+1234567893",
 	},
 	{
-		id: "58692a0f-3da1-471f-bd96-145571e29d72",
-		title: "Third Item",
+		id: "5e6f7g8h9i0j",
+		username: "davidmiller",
+		email: "davidmiller@yahoo.com",
+		rating: 4.2,
+		number: "+1234567894",
 	},
 	{
-		id: "526234a0f-3da1-471f-bd96-145571e29d72",
-		title: "Third Item",
+		id: "6f7g8h9i0j1k",
+		username: "lauragarcia",
+		email: "lauragarcia@protonmail.com",
+		rating: 4.9,
+		number: "+1234567895",
 	},
 	{
-		id: "536234a0f-3da1-471f-bd96-145571e29d72",
-		title: "Third Item",
+		id: "7g8h9i0j1k2l",
+		username: "jamesmartinez",
+		email: "jamesmartinez@gmail.com",
+		rating: 4.3,
+		number: "+1234567896",
 	},
 	{
-		id: "546234a0f-3da1-471f-bd96-145571e29d72",
-		title: "Third Item",
+		id: "8h9i0j1k2l3m",
+		username: "elizabethrodriguez",
+		email: "elizabethrodriguez@yahoo.com",
+		rating: 3.9,
+		number: "+1234567897",
 	},
 ];
 
 export default function Workers() {
-	const [isFocused, setIsFocused] = React.useState(false);
+	const [isFocused, setIsFocused] = useState(false);
 	const handleFocus = () => setIsFocused(true);
 	const handleBlur = () => setIsFocused(false);
-
+	const renderItem = ({ item }: any) => (
+		<Pressable onPress={() => console.log("Item pressed:", item.id)}>
+			<Worker2 item={item} />
+		</Pressable>
+	);
 	return (
-		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-			<SafeAreaView style={styles.container}>
-				<View style={styles.inputContainer}>
-					<TextInput
-						label="search"
-						mode="outlined"
-						outlineColor={isFocused ? "#1bcf43" : "black"}
-						activeOutlineColor="#1bcf43"
-						onFocus={handleFocus}
-						onBlur={handleBlur}
-						outlineStyle={{
-							borderWidth: 1,
-							borderRadius: 25,
-
-						}}
-						style={[styles.input, isFocused && { borderColor: "#1bcf43" }]}
-						placeholderTextColor={"#EFEFEF"}
-					/>
-					<Ionicons
-						name="search"
-						size={24}
-						color={isFocused ? "#1bcf43" : "grey"}
-						style={{ position: "absolute", right: "8%", top: 38 ,elevation: 5}}
-					/>
-				</View>
-				<ScrollView
-					style={styles.scrollView}
-					contentContainerStyle={styles.scrollViewContent}
-				>
-					{DATA.map((item) => (
-						<Worker2 item={item} key={item.id} />
-					))}
-				</ScrollView>
-			</SafeAreaView>
-		</TouchableWithoutFeedback>
+		<GestureHandlerRootView style={{ flex: 1 }}>
+			<TouchableWithoutFeedback>
+				<SafeAreaView style={styles.safeArea}>
+					<View style={styles.container}>
+						<View style={styles.inputContainer}>
+							<TextInput
+								label="Search"
+								mode="outlined"
+								outlineColor={isFocused ? "#069E2D" : "black"}
+								activeOutlineColor="#069E2D"
+								onFocus={handleFocus}
+								onBlur={() => {
+									handleBlur();
+								}}
+								outlineStyle={styles.inputOutline}
+								style={[styles.input, isFocused && styles.inputFocused]}
+								placeholderTextColor="#EFEFEF"
+							/>
+							<Ionicons
+								name="search"
+								size={24}
+								color={isFocused ? "#069E2D" : "grey"}
+								style={styles.searchIcon}
+							/>
+						</View>
+						<FlatList
+							data={DATA}
+							renderItem={renderItem}
+							keyExtractor={(item) => item.id}
+							contentContainerStyle={styles.listContent}
+							style={styles.list}
+							keyboardShouldPersistTaps="handled"
+						/>
+					</View>
+				</SafeAreaView>
+			</TouchableWithoutFeedback>
+		</GestureHandlerRootView>
 	);
 }
-
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "white",
-	},
-	inputContainer: {
-		paddingHorizontal: 10,
-		paddingTop: 10,
-		width: "100%",
-		
-	},
+	safeArea: { flex: 1, backgroundColor: "white" },
+	container: { flex: 1 },
+
+	inputContainer: { paddingHorizontal: 10, paddingTop: 10, width: "100%" },
+
 	input: {
 		backgroundColor: "white",
 		marginVertical: 10,
 		width: "95%",
 		alignSelf: "center",
 	},
-	
-	scrollView: {
-		backgroundColor: "#EFEFEF",
-		width: "100%",
-		flex: 1,
-elevation: 12,
-height: "100%",
-		
-	},
-	scrollViewContent: {
-		alignItems: "center",
-		paddingVertical: 20,
-	},
+	inputFocused: { borderColor: "#069E2D" },
+	inputOutline: { borderWidth: 1, borderRadius: 25 },
+	searchIcon: { position: "absolute", right: "9%", top: 38, zIndex: 1 },
+	list: { flex: 1, backgroundColor: "#EFEFEF" },
+	listContent: { paddingVertical: 20 },
 });

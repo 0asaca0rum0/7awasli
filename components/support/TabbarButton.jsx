@@ -62,13 +62,13 @@ const TabbarButton = ({ ...props }) => {
         >
             <Animated.View style={animatedStyle}>
                 {icons[routename]({
-                    color: isFocused ? "#1bcf43" : "black",
+                    color: isFocused ? "#069E2D" : "black",
                 })
                 }
                 </Animated.View>
             <Animated.Text
                 style={[{
-                    color: isFocused ? "#1bcf43" : "black",
+                    color: isFocused ? "#069E2D" : "black",
                     flexDirection: "column",
                 },animatedStyle2]}
             >

@@ -8,7 +8,7 @@ import {
 	TouchableWithoutFeedback,
 	Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link } from "expo-router";
 
 export default function SignupScreen() {

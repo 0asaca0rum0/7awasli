@@ -62,7 +62,7 @@ export default function MyTabBar({ state, descriptors, navigation }: any) {
 												key={route.key}
 												isFocused={isFocused}
 												routename={route.name}
-												color={isFocused ? "#1bcf43" : "black"}
+												color={isFocused ? "#069E2D" : "black"}
 												label={label}
 						
 						onPress={onPress}
@@ -71,7 +71,7 @@ export default function MyTabBar({ state, descriptors, navigation }: any) {
 
 					<Text
 							style={{
-								color: isFocused ? "#1bcf43" : "black",
+								color: isFocused ? "#069E2D" : "black",
 								flexDirection: "column",
 							}}
 						>

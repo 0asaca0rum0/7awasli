@@ -1,61 +1,140 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React, { useEffect } from 'react'
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { MaterialIcons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import Octicons from '@expo/vector-icons/Octicons';
 
-export default function Worker2({...props}) {
-    const { item } = props
-
+export default function Worker2({ item }) {
   return (
-
     <View style={styles.container}>
-          <View className='bg-primary h-3/5 p-1 mx-1 my-0 justify-center items-center rounded-full'>
-        <Text>avatar</Text>
-      </View>
-          <View className='space-y-1   w-5/6 pr-5'>
-            <View className='flex-row justify-between items-center px-1 h-1/2'>
-                  <Text style={styles.textmain}  >Elmasri ahmed </Text>
-                  <View className='flex-row items-center space-x-1'>
-                    <Text style={styles.textsub} > 4.5</Text>
-                      <Ionicons name='star' color={"#FFA500"}/>
-                  </View>
-            </View>
-       <View className='h-1/2'>
-                  <Text style={styles.textsub} >foxdeath100@gmail.com   </Text>
-                  <Text style={styles.textsub}>+213540430098</Text>
-       </View>
-        
+      <View style={styles.topContainer}>
+        <View style={styles.avatarContainer}>
+          <Text style={styles.avatarText}>
+            {item.username.charAt(0).toUpperCase() +
+              item.username.charAt(item.username.indexOf(' ') + 1).toUpperCase()}
+          </Text>
         </View>
+        <View style={styles.infoContainer}>
+          <View style={styles.nameRatingContainer}>
+            <Text style={styles.textName} numberOfLines={1}>{item.username}</Text>
+            <View style={styles.ratingContainer}>
+              <Text style={styles.textRating}>{item.rating}</Text>
+              <Ionicons name="star" color="#FFA500" size={14} />
+            </View>
+          </View>
+          <Text style={styles.textEmail} numberOfLines={1}>{item.email}</Text>
+          <Text style={styles.textPhone}>{item.number}</Text>
+        </View>
+      </View>
+
+      <View style={styles.actionsContainer}>
+        <Pressable style={styles.actionButton} onPress={() => console.log('Message pressed')}>
+          <Ionicons name="chatbox-outline" size={24} color="#069E2D" />
+          <Text style={styles.actionText}>Message</Text>
+        </Pressable>
+        <Pressable style={styles.actionButton} onPress={() => console.log('Locate pressed')}>
+          <Octicons name="location" size={24} color="#069E2D" />
+          <Text style={styles.actionText}>Locate</Text>
+        </Pressable>
+        <Pressable style={styles.actionButton} onPress={() => console.log('See User pressed')}>
+          <FontAwesome5 name="user" size={24} color="#069E2D" />
+          <Text style={styles.actionText}>See User</Text>
+        </Pressable>
+      </View>
     </View>
-  )
+  );
 }
+
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexWrap: 'wrap', 
-        backgroundColor: 'white',
-        padding: 3,
-        width: "98%",
-        height: "100%",
-        margin: 3,
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    textmain:{
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: 'black',
-    },
-    textsub:{
-        fontSize: 14,
-        color: 'grey',
-    }
-})
+  container: {
+    backgroundColor: 'white',
+    padding: 16,
+    marginHorizontal: 6,
+    marginVertical: 8,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  topContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  avatarContainer: {
+    backgroundColor: '#069E2D',
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    marginRight: 16,
+  },
+  avatarText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  infoContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  nameRatingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  textName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    flex: 1,
+    marginRight: 8,
+  },
+  textRating: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
+    marginRight: 4,
+  },
+  textEmail: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 2,
+  },
+  textPhone: {
+    fontSize: 14,
+    color: '#666',
+  },
+  actionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 4,
+  },
+  actionButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#F0F0F0',
+    paddingVertical: 8,
+    borderRadius: 8,
+    marginHorizontal: 4,
+  },
+  actionText: {
+    fontSize: 12,
+    color: '#333',
+    marginTop: 4,
+  },
+});
