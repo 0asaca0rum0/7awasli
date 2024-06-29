@@ -43,9 +43,7 @@ export default function Profile() {
 						<Text style={styles.role}>{profileData.role}</Text>
 					</View>
 					<View>
-						<Pressable
-							onPress={() => console.log("Logout pressed")}
-						>
+						<Pressable onPress={() => console.log("Logout pressed")}>
 							<Ionicons name="log-out-outline" size={24} color="#069E2D" />
 						</Pressable>
 					</View>
@@ -55,12 +53,16 @@ export default function Profile() {
 						style={styles.button}
 						onPress={() => console.log("Edit Profile pressed")}
 					>
+						<Ionicons name="pencil-outline" size={24} color="white" />
+
 						<Text style={styles.buttonText}>Edit Profile</Text>
 					</Pressable>
 					<Pressable
 						style={styles.buttonOutline}
 						onPress={() => console.log("Share Profile pressed")}
 					>
+						<Ionicons name="share-social-outline" size={24} color="#069E2D" />
+
 						<Text style={styles.buttonTextInverse}>Share Profile</Text>
 					</Pressable>
 				</View>
@@ -92,7 +94,7 @@ export default function Profile() {
 				</View>
 			</View>
 
-			<View style={styles.sectionContainerEnd }>
+			<View style={styles.sectionContainerEnd}>
 				<Text style={styles.sectionTitle}>Contact</Text>
 				<View style={styles.contactContainer}>
 					<Pressable style={styles.contactItem}>
@@ -150,21 +152,30 @@ const styles = StyleSheet.create({
 		color: "#666",
 	},
 	headerButtons: {
-		width: "90%",
+		width: "100%",
 		flex: 1,
 		flexDirection: "row",
 		justifyContent: "space-around",
 		alignItems: "center",
-		margin: 5,
-		padding: 5,
+		margin: 4,
+		padding: 2,
+		marginBottom: 0,
 	},
 	button: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-around",
+		gap: 5,
 		backgroundColor: "#069E2D",
 		paddingVertical: 10,
 		paddingHorizontal: 20,
 		borderRadius: 20,
 	},
 	buttonOutline: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-around",
+		gap: 5,
 		borderColor: "#069E2D",
 		paddingVertical: 10,
 		paddingHorizontal: 20,
@@ -221,7 +232,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		padding: 20,
 		marginTop: 10,
-		paddingBottom: 80,},
+		paddingBottom: 80,
+	},
 	sectionTitle: {
 		fontSize: 18,
 		fontWeight: "bold",
