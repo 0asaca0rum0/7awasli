@@ -59,6 +59,10 @@ export default function RootLayout() {
 					/>
 
 					<Stack.Screen name="+not-found" />
+					<Stack.Screen
+						name="profile/[id]"
+						options={{ headerShown: false, statusBarTranslucent: true }}
+					/>
 				</Stack>
 			</PaperProvider>
 		</ThemeProvider>

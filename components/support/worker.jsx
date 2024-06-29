@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { MaterialIcons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Octicons from '@expo/vector-icons/Octicons';
+import { Link } from 'expo-router';
 
 export default function Worker2({ item }) {
   return (
@@ -36,10 +37,12 @@ export default function Worker2({ item }) {
           <Octicons name="location" size={24} color="#069E2D" />
           <Text style={styles.actionText}>Locate</Text>
         </Pressable>
-        <Pressable style={styles.actionButton} onPress={() => console.log('See User pressed')}>
-          <FontAwesome5 name="user" size={24} color="#069E2D" />
-          <Text style={styles.actionText}>See User</Text>
-        </Pressable>
+        <View style={styles.actionButton}>
+          <Link href={`profile/${item.id}`} style={styles.link} onPress={() => console.log('See User pressed')}>
+            <FontAwesome5 name="user" size={22} color="#069E2D" />
+            <Text style={styles.actionText}>See User</Text>
+          </Link>
+        </View>
       </View>
     </View>
   );
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 4,
+    marginHorizontal: 4,
   },
   actionButton: {
     flex: 1,
@@ -132,9 +136,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginHorizontal: 4,
   },
+  link: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
   actionText: {
     fontSize: 12,
     color: '#333',
     marginTop: 4,
+    marginHorizontal: 4,
   },
+
 });
