@@ -11,6 +11,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
@@ -61,7 +62,11 @@ export default function RootLayout() {
 					<Stack.Screen name="+not-found" />
 					<Stack.Screen
 						name="profile/[id]"
-						options={{ headerShown: false, statusBarTranslucent: true }}
+						options={{
+							headerShown: false,
+							statusBarTranslucent: true,
+
+						}}
 					/>
 				</Stack>
 			</PaperProvider>

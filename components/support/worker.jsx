@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { MaterialIcons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Octicons from '@expo/vector-icons/Octicons';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 export default function Worker2({ item }) {
+  const router = useRouter();
   return (
+    
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.avatarContainer}>
@@ -37,12 +39,13 @@ export default function Worker2({ item }) {
           <Octicons name="location" size={24} color="#069E2D" />
           <Text style={styles.actionText}>Locate</Text>
         </Pressable>
-        <View style={styles.actionButton}>
-          <Link href={`profile/${item.id}`} style={styles.link} onPress={() => console.log('See User pressed')}>
-            <FontAwesome5 name="user" size={22} color="#069E2D" />
-            <Text style={styles.actionText}>See User</Text>
-          </Link>
-        </View>
+        <Pressable
+          style={styles.actionButton}
+          onPress={() => router.push(`/profile/${item.id}`)}
+        >
+          <FontAwesome5 name="user" size={22} color="#069E2D" style={styles.actionIcon} />
+          <Text style={styles.actionText}>See User</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -130,23 +133,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     backgroundColor: '#F0F0F0',
     paddingVertical: 8,
     borderRadius: 8,
     marginHorizontal: 4,
   },
   link: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
-    width: '100%',
+    justifyContent: 'center',
   },
   actionText: {
     fontSize: 12,
     color: '#333',
-    marginTop: 4,
-    marginHorizontal: 4,
+    marginLeft: 8,
   },
 
 });

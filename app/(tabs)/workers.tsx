@@ -17,61 +17,90 @@ import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 const DATA = [
 	{
 		id: "1a2b3c4d5e6f",
-		username: "john smith",
+		username: "John Smith",
 		email: "johnsmith@gmail.com",
 		rating: 4.5,
 		number: "+1234567890",
+		skills: ["React Native", "JavaScript", "Node.js"],
 	},
 	{
 		id: "2b3c4d5e6f7g",
-		username: "emily jones",
+		username: "Emily Jones",
 		email: "emilyjones@yahoo.com",
 		rating: 4.0,
 		number: "+1234567891",
+		skills: ["UI/UX Design", "Figma", "Sketch"],
 	},
 	{
 		id: "3c4d5e6f7g8h",
-		username: "michael brown",
+		username: "Michael Brown",
 		email: "michaelbrown@protonmail.com",
 		rating: 4.7,
 		number: "+1234567892",
+		skills: ["Python", "Data Science", "Machine Learning"],
 	},
 	{
 		id: "4d5e6f7g8h9i",
-		username: "sarah wilson",
+		username: "Sarah Wilson",
 		email: "sarahwilson@gmail.com",
 		rating: 3.8,
 		number: "+1234567893",
+		skills: ["Content Writing", "SEO", "Copywriting"],
 	},
 	{
 		id: "5e6f7g8h9i0j",
-		username: "david miller",
+		username: "David Miller",
 		email: "davidmiller@yahoo.com",
 		rating: 4.2,
 		number: "+1234567894",
+		skills: ["Digital Marketing", "Google Analytics", "Social Media"],
 	},
 	{
 		id: "6f7g8h9i0j1k",
-		username: "laura garcia",
+		username: "Laura Garcia",
 		email: "lauragarcia@protonmail.com",
 		rating: 4.9,
 		number: "+1234567895",
+		skills: ["Graphic Design", "Photoshop", "Illustrator"],
 	},
 	{
 		id: "7g8h9i0j1k2l",
-		username: "james martinez",
+		username: "James Martinez",
 		email: "jamesmartinez@gmail.com",
 		rating: 4.3,
 		number: "+1234567896",
+		skills: ["Web Development", "HTML", "CSS", "JavaScript"],
 	},
 	{
 		id: "8h9i0j1k2l3m",
-		username: "elizabeth rodriguez",
+		username: "Elizabeth Rodriguez",
 		email: "elizabethrodriguez@yahoo.com",
 		rating: 3.9,
 		number: "+1234567897",
+		skills: ["Project Management", "Agile", "Scrum"],
+	},
+	{
+		id: "9i0j1k2l3m4n",
+		username: "Daniel Lee",
+		email: "daniellee@gmail.com",
+		rating: 4.4,
+		number: "+1234567898",
+		skills: ["Software Development", "Java", "Spring"],
+	},
+	{
+		id: "0j1k2l3m4n5o",
+		username: "Sophia Harris",
+		email: "sophiaharris@protonmail.com",
+		rating: 4.1,
+		number: "+1234567899",
+		skills: ["Data Analysis", "Excel", "SQL"],
 	},
 ];
+
+
+
+
+
 
 export default function Workers() {
 	const [isFocused, setIsFocused] = useState(false);

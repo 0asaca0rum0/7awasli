@@ -7,29 +7,53 @@ import {
 	ScrollView,
 	Pressable,
 } from "react-native";
-import {
-	Ionicons,
-	MaterialCommunityIcons,
-	FontAwesome5,
-	AntDesign,
-} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
 
 const profileData = {
-	name: " Elmasri ahmed",
+	name: "Elmasri ahmed",
 	role: "Web Developer",
-	avatar: "https://randomuser.me/api/portraits/men/32.jpg", // Replace with your actual avatar URL if available
+	rating: 4.8,
+	avatar: "https://randomuser.me/api/portraits/men/32.jpg",
 	bio: "Passionate about creating elegant solutions to complex problems. Always learning, always coding.",
-	stats: {
-		projects: 47, // Update with your actual project count
-		followers: 1280, // Update with your actual follower count
-		following: 384, // Update with your actual following count
-	},
-	skills: ["React Native", "TypeScript", "Node.js", "GraphQL", "Docker"], // Update with your actual skills
+	skills: ["React Native", "TypeScript", "Node.js", "GraphQL", "Docker"],
 	contact: {
 		email: "foxdeath100@gmail.com",
 		phone: "+213540430098",
-		location: "San Francisco, CA", // Update with your actual location if different
+		location: "San Francisco, CA",
 	},
+	comments: [
+		{
+			user: "Alice",
+			comment: "Great work on the latest project!",
+			rating: 5,
+			avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+		},
+		{
+			user: "Bob",
+			comment: "Always delivers on time. Highly recommended.",
+			rating: 4,
+			avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+		},
+		{
+			user: "Charlie",
+			comment: "Excellent communication skills.",
+			rating: 5,
+			avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+		},
+		{
+			user: "Diana",
+			comment: "Impressive problem-solving abilities.",
+			rating: 5,
+			avatar: "https://randomuser.me/api/portraits/women/4.jpg",
+		},
+		{
+			user: "Ethan",
+			comment: "Could improve on documentation, but overall good work.",
+			rating: 4,
+			avatar: "https://randomuser.me/api/portraits/men/5.jpg",
+		},
+	],
 };
 
 export default function Profile() {
@@ -41,12 +65,23 @@ export default function Profile() {
 					<View style={styles.headerText}>
 						<Text style={styles.name}>{profileData.name}</Text>
 						<Text style={styles.role}>{profileData.role}</Text>
+						<View style={styles.ratingContainer}>
+							<Text style={styles.rating}>{profileData.rating}</Text>
+							{[...Array(5)].map((_, i) => (
+								<Ionicons
+									key={i}
+									name={
+										i < Math.floor(profileData.rating) ? "star" : "star-outline"
+									}
+									size={16}
+									color="#FFD700"
+								/>
+							))}
+						</View>
 					</View>
-					<View>
-						<Pressable onPress={() => console.log("Logout pressed")}>
-							<Ionicons name="log-out-outline" size={24} color="#069E2D" />
-						</Pressable>
-					</View>
+					<Link href={'login'} >
+						<Ionicons name="log-out-outline" size={24} color="#069E2D" />
+					</Link>
 				</View>
 				<View style={styles.headerButtons}>
 					<Pressable
@@ -54,7 +89,6 @@ export default function Profile() {
 						onPress={() => console.log("Edit Profile pressed")}
 					>
 						<Ionicons name="pencil-outline" size={24} color="white" />
-
 						<Text style={styles.buttonText}>Edit Profile</Text>
 					</Pressable>
 					<Pressable
@@ -62,39 +96,12 @@ export default function Profile() {
 						onPress={() => console.log("Share Profile pressed")}
 					>
 						<Ionicons name="share-social-outline" size={24} color="#069E2D" />
-
 						<Text style={styles.buttonTextInverse}>Share Profile</Text>
 					</Pressable>
 				</View>
 			</View>
 
-			<View style={styles.bioContainer}>
-				<Text style={styles.bioText}>{profileData.bio}</Text>
-			</View>
-
-			<View style={styles.statsContainer}>
-				{Object.entries(profileData.stats).map(([key, value]) => (
-					<View key={key} style={styles.statItem}>
-						<Text style={styles.statValue}>{value}</Text>
-						<Text style={styles.statLabel}>
-							{key.charAt(0).toUpperCase() + key.slice(1)}
-						</Text>
-					</View>
-				))}
-			</View>
-
 			<View style={styles.sectionContainer}>
-				<Text style={styles.sectionTitle}>Skills</Text>
-				<View style={styles.skillsContainer}>
-					{profileData.skills.map((skill, index) => (
-						<View key={index} style={styles.skillItem}>
-							<Text style={styles.skillText}>{skill}</Text>
-						</View>
-					))}
-				</View>
-			</View>
-
-			<View style={styles.sectionContainerEnd}>
 				<Text style={styles.sectionTitle}>Contact</Text>
 				<View style={styles.contactContainer}>
 					<Pressable style={styles.contactItem}>
@@ -112,6 +119,49 @@ export default function Profile() {
 						</Text>
 					</Pressable>
 				</View>
+			</View>
+
+			<View style={styles.bioContainer}>
+				<Text style={styles.bioText}>{profileData.bio}</Text>
+			</View>
+
+			<View style={styles.sectionContainer}>
+				<Text style={styles.sectionTitle}>Skills</Text>
+				<View style={styles.skillsContainer}>
+					{profileData.skills.map((skill, index) => (
+						<View key={index} style={styles.skillItem}>
+							<Text style={styles.skillText}>{skill}</Text>
+						</View>
+					))}
+				</View>
+			</View>
+
+			<View style={styles.sectionContainerEnd}>
+				<Text style={styles.sectionTitle}>Comments</Text>
+				{profileData.comments.map((comment, index) => (
+					<View key={index} style={styles.commentItem}>
+						<View style={styles.commentHeader}>
+							<View style={styles.commentUser}>
+								<Image
+									source={{ uri: comment.avatar }}
+									style={styles.commentAvatar}
+								/>
+								<Text style={styles.commentUserName}>{comment.user}</Text>
+							</View>
+							<View style={styles.ratingContainer}>
+								{[...Array(5)].map((_, i) => (
+									<Ionicons
+										key={i}
+										name={i < comment.rating ? "star" : "star-outline"}
+										size={16}
+										color="#FFD700"
+									/>
+								))}
+							</View>
+						</View>
+						<Text style={styles.commentText}>{comment.comment}</Text>
+					</View>
+				))}
 			</View>
 		</ScrollView>
 	);
@@ -151,21 +201,28 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: "#666",
 	},
+	ratingContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		marginTop: 5,
+	},
+	rating: {
+		fontSize: 16,
+		fontWeight: "bold",
+		color: "#069E2D",
+		marginRight: 5,
+	},
 	headerButtons: {
 		width: "100%",
-		flex: 1,
 		flexDirection: "row",
 		justifyContent: "space-around",
 		alignItems: "center",
-		margin: 4,
-		padding: 2,
-		marginBottom: 0,
+		marginTop: 20,
 	},
 	button: {
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "space-around",
-		gap: 5,
+		justifyContent: "center",
 		backgroundColor: "#069E2D",
 		paddingVertical: 10,
 		paddingHorizontal: 20,
@@ -174,25 +231,25 @@ const styles = StyleSheet.create({
 	buttonOutline: {
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "space-around",
-		gap: 5,
+		justifyContent: "center",
 		borderColor: "#069E2D",
+		borderWidth: 1,
 		paddingVertical: 10,
 		paddingHorizontal: 20,
 		borderRadius: 20,
-		borderWidth: 1,
 	},
 	buttonText: {
 		color: "white",
 		fontSize: 16,
 		fontWeight: "bold",
+		marginLeft: 5,
 	},
 	buttonTextInverse: {
 		color: "#069E2D",
 		fontSize: 16,
 		fontWeight: "bold",
+		marginLeft: 5,
 	},
-
 	bioContainer: {
 		backgroundColor: "white",
 		padding: 20,
@@ -202,26 +259,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: "#444",
 		lineHeight: 24,
-	},
-	statsContainer: {
-		flexDirection: "row",
-		justifyContent: "space-around",
-		backgroundColor: "white",
-		padding: 20,
-		marginTop: 10,
-	},
-	statItem: {
-		alignItems: "center",
-	},
-	statValue: {
-		fontSize: 20,
-		fontWeight: "bold",
-		color: "#069E2D",
-	},
-	statLabel: {
-		fontSize: 14,
-		color: "#666",
-		marginTop: 5,
 	},
 	sectionContainer: {
 		backgroundColor: "white",
@@ -255,6 +292,37 @@ const styles = StyleSheet.create({
 	skillText: {
 		color: "#069E2D",
 		fontSize: 14,
+	},
+	commentItem: {
+		backgroundColor: "#f0f0f0",
+		padding: 10,
+		borderRadius: 8,
+		marginBottom: 10,
+	},
+	commentHeader: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+		marginBottom: 5,
+	},
+	commentUser: {
+		flexDirection: "row",
+		alignItems: "center",
+	},
+	commentAvatar: {
+		width: 30,
+		height: 30,
+		borderRadius: 15,
+		marginRight: 10,
+	},
+	commentUserName: {
+		fontWeight: "bold",
+		fontSize: 16,
+		color: "#333",
+	},
+	commentText: {
+		fontSize: 14,
+		color: "#444",
 	},
 	contactContainer: {
 		marginTop: 10,
