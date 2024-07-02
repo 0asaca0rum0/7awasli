@@ -65,7 +65,13 @@ export default function RootLayout() {
 						options={{
 							headerShown: false,
 							statusBarTranslucent: true,
-
+						}}
+					/>
+					<Stack.Screen
+						name="chat/[id]"
+						options={{
+							headerShown: false,
+							statusBarTranslucent: true,
 						}}
 					/>
 				</Stack>

@@ -94,25 +94,27 @@ const DATA = [
 	},
 ];
 
-
 const SAMPLE_COMMENTS = [
 	{
 		user: "Alice",
 		comment: "Great work!",
 		rating: 5,
 		avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+		timestamp: "2024-06-30T12:34:56Z",
 	},
 	{
 		user: "Bob",
 		comment: "Very professional.",
 		rating: 4,
 		avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+		timestamp: "2024-06-30T14:20:00Z",
 	},
 	{
 		user: "Charlie",
 		comment: "Excellent communication.",
 		rating: 5,
 		avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+		timestamp: "2024-06-30T15:45:30Z",
 	},
 ];
 
@@ -131,6 +133,7 @@ export default function DetailsScreen() {
 			comment: newComment,
 			rating: newRating,
 			avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
+			timestamp: new Date().toISOString(),
 		};
 		setComments([comment, ...comments]);
 		setNewComment("");
@@ -253,6 +256,9 @@ export default function DetailsScreen() {
 								</View>
 							</View>
 							<Text style={styles.commentText}>{comment.comment}</Text>
+							<Text style={styles.timestamp}>
+								{new Date(comment.timestamp).toLocaleString()}
+							</Text>
 						</View>
 					))}
 				</View>
@@ -334,12 +340,12 @@ const styles = StyleSheet.create({
 	contactItem: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginBottom: 15,
+		marginBottom: 10,
 	},
 	contactText: {
-		marginLeft: 10,
 		fontSize: 16,
-		color: "#444",
+		color: "#333",
+		marginLeft: 10,
 	},
 	skillsContainer: {
 		flexDirection: "row",
@@ -358,8 +364,6 @@ const styles = StyleSheet.create({
 		fontSize: 14,
 	},
 	addCommentContainer: {
-    flex: 1,
-    width: "100%",
 		backgroundColor: "#ffffff",
 		padding: 15,
 		borderRadius: 10,
@@ -374,7 +378,7 @@ const styles = StyleSheet.create({
 		shadowRadius: 3.84,
 	},
 	commentInput: {
-		backgroundColor: "#f5f5f5",
+		backgroundColor: "#f9f9f9",
 		borderRadius: 8,
 		padding: 15,
 		marginBottom: 15,
@@ -397,68 +401,55 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		fontSize: 16,
 	},
-
-	errorText: {
-		fontSize: 18,
-		color: "red",
-		textAlign: "center",
-		marginTop: 20,
-	},
-	goBackButton: {
-		position: "absolute",
-		top: 40,
-		left: 20,
-		borderRadius: 30,
-		width: 40,
-		height: 40,
-		justifyContent: "center",
-		alignItems: "center",
-		elevation: 25,
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 1,
-		shadowRadius: 2,
-	},
 	commentItem: {
-		backgroundColor: "white",
-		padding: 15,
-		borderRadius: 8,
+		padding: 10,
+		backgroundColor: "#f9f9f9",
+		borderRadius: 5,
 		marginBottom: 10,
-		elevation: 2,
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 3.84,
 	},
 	commentHeader: {
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-		marginBottom: 10,
+		marginBottom: 5,
 	},
 	commentUser: {
 		flexDirection: "row",
 		alignItems: "center",
 	},
 	commentAvatar: {
-		width: 40,
-		height: 40,
-		borderRadius: 20,
+		width: 30,
+		height: 30,
+		borderRadius: 15,
 		marginRight: 10,
 	},
 	commentUserName: {
-		fontWeight: "bold",
 		fontSize: 16,
+		fontWeight: "bold",
 		color: "#333",
 	},
 	commentText: {
 		fontSize: 14,
-		color: "#444",
+		color: "#333",
+		marginTop: 5,
+	},
+	timestamp: {
+		fontSize: 12,
+		color: "#666",
+		marginTop: 5,
+		textAlign: "right",
+	},
+	goBackButton: {
+		position: "absolute",
+		top: 20,
+		left: 20,
+		backgroundColor: "white",
+		borderRadius: 20,
+		padding: 5,
+		elevation: 3,
+	},
+	errorText: {
+		color: "#333",
+		fontSize: 18,
 	},
 });

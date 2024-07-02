@@ -31,7 +31,7 @@ export default function Worker2({ item }) {
       </View>
 
       <View style={styles.actionsContainer}>
-        <Pressable style={styles.actionButton} onPress={() => console.log('Message pressed')}>
+        <Pressable style={styles.actionButton} onPress={() => router.push(`/chat/${item.id}`)}>
           <Ionicons name="chatbox-outline" size={24} color="#069E2D" />
           <Text style={styles.actionText}>Message</Text>
         </Pressable>

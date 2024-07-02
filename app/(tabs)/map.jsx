@@ -12,7 +12,7 @@ import { TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 
-export default function Workers() {
+export default function MapScreen() {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState("");
 	const [isFocused, setIsFocused] = useState(false);
@@ -36,7 +36,7 @@ export default function Workers() {
 	}, []);
 
 	useEffect(() => {
-		if (location && mapRef.current && isScreenFocused ) {
+		if (location && mapRef.current && isScreenFocused) {
 			mapRef.current.animateToRegion({
 				latitude: location.coords.latitude,
 				longitude: location.coords.longitude,
@@ -44,7 +44,7 @@ export default function Workers() {
 				longitudeDelta: 0.0421,
 			}, 1000); // 1000ms animation duration
 		}
-	}, [location,isScreenFocused]);
+	}, [location, isScreenFocused]);
 
 	let text = "Waiting..";
 	if (errorMsg) {
