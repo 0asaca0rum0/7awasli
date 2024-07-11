@@ -11,17 +11,19 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function LoginScreen() {
-	const [placeholder, setPlaceholder] = useState("email");
-	const [password, setPassword] = useState("password");
+	const { t } = useTranslation();
+	const [placeholder, setPlaceholder] = useState(t("email_placeholder"));
+	const [password, setPassword] = useState(t("password_placeholder"));
 
 	const handlePlaceholderFocus = () => {
 		setPlaceholder("");
 	};
 	const handlePlaceholderBlur = () => {
 		if (placeholder === "") {
-			setPlaceholder("email");
+			setPlaceholder(t("email_placeholder"));
 		}
 	};
 	const handlePasswordFocus = () => {
@@ -29,7 +31,7 @@ export default function LoginScreen() {
 	};
 	const handlePasswordBlur = () => {
 		if (password === "") {
-			setPassword("password");
+			setPassword(t("password_placeholder"));
 		}
 	};
 
@@ -68,24 +70,24 @@ export default function LoginScreen() {
 								className="bg-primary w-3/4 rounded-full h-12 justify-center items-center shadow-lg shadow-black/80"
 								onPress={handlePress}
 							>
-								<Text className="text-2xl text-white">login</Text>
+								<Text className="text-2xl text-white">{t("login_button")}</Text>
 							</Pressable>
 
 							<View className="justify-center items-center space-y-2">
 								<Link href={"/(login)/forgot"} asChild>
 									<Pressable>
 										<Text className="text-sm underline text-gray-800">
-											reset password
+											{t("reset_password")}
 										</Text>
 									</Pressable>
 								</Link>
 								<Text className="text-sm text-center text-gray-800">
-									don't have an account?{" "}
+									{t("dont_have_account")}{" "}
 									<Link href={"/(signup)"} className="text-primary">
-										create one
+										{t("create_account")}
 									</Link>
 								</Text>
-								<Text className="text-base capitalize">or</Text>
+								<Text className="text-base capitalize">{t("or")}</Text>
 							</View>
 
 							<View className="flex-row items-center justify-center w-1/2 h-24 space-x-3">
@@ -106,12 +108,12 @@ export default function LoginScreen() {
 
 						<View className="w-full items-center justify-start h-1/5">
 							<Text className="text-base text-gray-500">
-								login as a{" "}
+								{t("login_as_a")}{" "}
 								<Link
 									href={"/(tabs)"}
 									className="underline underline-offset-4 h-full"
 								>
-									guest
+									{t("guest")}
 								</Link>
 							</Text>
 						</View>

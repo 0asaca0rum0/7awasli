@@ -3,8 +3,10 @@ import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Searchbar } from "react-native-paper";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function ChatList() {
+	const { t } = useTranslation();
 	const [searchQuery, setSearchQuery] = useState("");
 	const router = useRouter();
 	const [chats, setChats] = useState([
@@ -17,7 +19,7 @@ export default function ChatList() {
 		chat.username.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
-	const renderChatItem = ({ item }:any) => (
+	const renderChatItem = ({ item }: any) => (
 		<Pressable
 			style={styles.chatItem}
 			onPress={() => router.push(`/chat/${item.id}`)}
@@ -39,7 +41,7 @@ export default function ChatList() {
 	return (
 		<SafeAreaView style={styles.safeArea}>
 			<Searchbar
-				placeholder="Search chats..."
+				placeholder={t("chat_list_search_placeholder")}
 				onChangeText={setSearchQuery}
 				value={searchQuery}
 				style={styles.searchBar}

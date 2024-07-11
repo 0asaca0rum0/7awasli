@@ -8,10 +8,12 @@ import {
 	TouchableWithoutFeedback,
 	Keyboard,
 } from "react-native";
-import  { useState } from "react";
+import { useState } from "react";
 import { Link } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function SignupScreen() {
+	const { t } = useTranslation();
 	const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("");
 	const [fullname, setFullname] = useState("");
@@ -50,14 +52,14 @@ export default function SignupScreen() {
 				<ImageBackground
 					source={require("../../assets/images/login.png")}
 					resizeMode="cover"
-					className={`flex-1 w-full h-full flex-col items-center justify-end 	`}
+					className={`flex-1 w-full h-full flex-col items-center justify-end   `}
 				>
 					<View className="w-full h-2/3 justify-start items-center space-y-6">
 						<TextInput
 							selectionColor={"#1bcf43"}
 							id="full name"
 							className="bg-white rounded-full w-3/4 h-12 p-3 shadow-lg shadow-black/80"
-							placeholder="full name"
+							placeholder={t("signup_full_name")}
 							inputMode="text"
 							value={fullname}
 							onChangeText={handleFullname}
@@ -67,7 +69,7 @@ export default function SignupScreen() {
 							selectionColor={"#1bcf43"}
 							id="email"
 							className="bg-white rounded-full w-3/4 h-12 p-3 shadow-lg shadow-black/80"
-							placeholder="email"
+							placeholder={t("signup_email")}
 							inputMode="email"
 							value={email}
 							onChangeText={handleEmail}
@@ -77,7 +79,7 @@ export default function SignupScreen() {
 							selectionColor={"#1bcf43"}
 							id="password"
 							className="bg-white rounded-full w-3/4 h-12 p-3 shadow-lg shadow-black/80"
-							placeholder="password"
+							placeholder={t("signup_password")}
 							secureTextEntry={true}
 							value={password}
 							onChangeText={handlePassword}
@@ -86,7 +88,7 @@ export default function SignupScreen() {
 							selectionColor={"#1bcf43"}
 							id="password confirmation"
 							className="bg-white rounded-full w-3/4 h-12 p-3 shadow-lg shadow-black/80 focus:outline-primary"
-							placeholder="confirm password"
+							placeholder={t("signup_confirm_password")}
 							secureTextEntry={true}
 							value={confirmPassword}
 							onChangeText={handleConfirmPassword}
@@ -95,7 +97,7 @@ export default function SignupScreen() {
 							selectionColor={"#1bcf43"}
 							id="number"
 							className="bg-white rounded-full w-3/4 h-12 p-3 shadow-lg shadow-black/80"
-							placeholder="number"
+							placeholder={t("signup_number")}
 							inputMode="numeric"
 							value={number}
 							onChangeText={handlenumber}
@@ -104,12 +106,12 @@ export default function SignupScreen() {
 							className="bg-primary w-3/4 rounded-full h-12 justify-center items-center shadow-lg shadow-black/80"
 							onPress={handlePress}
 						>
-							<Text className="text-2xl text-white">sign up</Text>
+							<Text className="text-2xl text-white">{t("signup_sign_up")}</Text>
 						</Pressable>
 						<Text className="text-gray-500">
-							have an account?{" "}
+							{t("signup_have_account")}{" "}
 							<Link href={"(login)"} className="underline">
-								login
+								{t("signup_login")}
 							</Link>
 						</Text>
 					</View>

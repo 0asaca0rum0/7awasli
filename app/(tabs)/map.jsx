@@ -6,13 +6,14 @@ import {
 } from "react-native";
 import MapView from "react-native-maps";
 import * as Location from "expo-location";
-
 import React, { useEffect, useState, useRef } from "react";
 import { TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
+import { useTranslation } from 'react-i18next';
 
 export default function MapScreen() {
+	const { t } = useTranslation();
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState("");
 	const [isFocused, setIsFocused] = useState(false);
@@ -26,14 +27,14 @@ export default function MapScreen() {
 		(async () => {
 			let { status } = await Location.requestForegroundPermissionsAsync();
 			if (status !== "granted") {
-				setErrorMsg("Permission to access location was denied");
+				setErrorMsg(t('location_permission_denied'));
 				return;
 			}
 
 			let location = await Location.getCurrentPositionAsync({});
 			setLocation(location);
 		})();
-	}, []);
+	}, [t]);
 
 	useEffect(() => {
 		if (location && mapRef.current && isScreenFocused) {
@@ -46,7 +47,7 @@ export default function MapScreen() {
 		}
 	}, [location, isScreenFocused]);
 
-	let text = "Waiting..";
+	let text = t('waiting');
 	if (errorMsg) {
 		text = errorMsg;
 	} else if (location) {
@@ -67,10 +68,10 @@ export default function MapScreen() {
 						latitudeDelta: 0.0922,
 						longitudeDelta: 0.0421,
 					}}
-				></MapView>
+				/>
 				<View style={styles.input2}>
 					<TextInput
-						label="search"
+						label={t('map_search')}
 						mode="outlined"
 						outlineColor="black"
 						outlineStyle={{
@@ -92,7 +93,7 @@ export default function MapScreen() {
 						onBlur={handleBlur}
 						style={styles.input}
 						placeholderTextColor={"#EEEEEE"}
-						placeholder="Search"
+						placeholder={t('map_search_placeholder')}
 					/>
 					<Ionicons
 						name="search"

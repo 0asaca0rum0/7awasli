@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
-
+import { useTranslation } from "react-i18next";
 const DATA = [
 	{
 		id: "1a2b3c4d5e6f",
@@ -119,8 +119,9 @@ const SAMPLE_COMMENTS = [
 ];
 
 export default function DetailsScreen() {
-	const { id } = useLocalSearchParams();
 	const router = useRouter();
+	const { t } = useTranslation();
+	const { id } = useLocalSearchParams();
 	const user = DATA.find((item) => item.id === id);
 	const [comments, setComments] = useState(SAMPLE_COMMENTS);
 	const [newComment, setNewComment] = useState("");
@@ -149,125 +150,125 @@ export default function DetailsScreen() {
 	}
 
 	return (
-		<View style={styles.container}>
-			<ScrollView>
-				<View style={styles.header}>
-					<View style={styles.info}>
-						<Image
-							source={{
-								uri: `https://randomuser.me/api/portraits/men/${
-									parseInt(user.id, 36) % 100
-								}.jpg`,
-							}}
-							style={styles.avatar}
-						/>
-						<View style={styles.headerText}>
-							<Text style={styles.name}>{user.username}</Text>
-							<Text style={styles.role}>Worker</Text>
-							<View style={styles.ratingContainer}>
-								<Text style={styles.rating}>{user.rating.toFixed(1)}</Text>
-								{[...Array(5)].map((_, i) => (
-									<Ionicons
-										key={i}
-										name={i < Math.floor(user.rating) ? "star" : "star-outline"}
-										size={16}
-										color="#FFD700"
-									/>
-								))}
-							</View>
-						</View>
-						<Pressable onPress={() => router.push(`/chat/${user.id}`)}>
-							<Ionicons name="chatbox-outline" size={24} color="#069E2D" />
-						</Pressable>
-					</View>
-				</View>
+  <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.header}>
+          <View style={styles.info}>
+            <Image
+              source={{
+                uri: `https://randomuser.me/api/portraits/men/${
+                  parseInt(user.id, 36) % 100
+                }.jpg`,
+              }}
+              style={styles.avatar}
+            />
+            <View style={styles.headerText}>
+              <Text style={styles.name}>{user.username}</Text>
+              <Text style={styles.role}>{t('worker')}</Text>
+              <View style={styles.ratingContainer}>
+                <Text style={styles.rating}>{user.rating.toFixed(1)}</Text>
+                {[...Array(5)].map((_, i) => (
+                  <Ionicons
+                    key={i}
+                    name={i < Math.floor(user.rating) ? "star" : "star-outline"}
+                    size={16}
+                    color="#FFD700"
+                  />
+                ))}
+              </View>
+            </View>
+            <Pressable onPress={() => router.push(`/chat/${user.id}`)}>
+              <Ionicons name="chatbox-outline" size={24} color="#069E2D" />
+            </Pressable>
+          </View>
+        </View>
 
-				<View style={styles.sectionContainer}>
-					<Text style={styles.sectionTitle}>Contact</Text>
-					<View style={styles.contactContainer}>
-						<Pressable style={styles.contactItem}>
-							<Ionicons name="mail-outline" size={24} color="#069E2D" />
-							<Text style={styles.contactText}>{user.email}</Text>
-						</Pressable>
-						<Pressable style={styles.contactItem}>
-							<Ionicons name="call-outline" size={24} color="#069E2D" />
-							<Text style={styles.contactText}>{user.number}</Text>
-						</Pressable>
-					</View>
-				</View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>{t('contact')}</Text>
+          <View style={styles.contactContainer}>
+            <Pressable style={styles.contactItem}>
+              <Ionicons name="mail-outline" size={24} color="#069E2D" />
+              <Text style={styles.contactText}>{user.email}</Text>
+            </Pressable>
+            <Pressable style={styles.contactItem}>
+              <Ionicons name="call-outline" size={24} color="#069E2D" />
+              <Text style={styles.contactText}>{user.number}</Text>
+            </Pressable>
+          </View>
+        </View>
 
-				<View style={styles.sectionContainer}>
-					<Text style={styles.sectionTitle}>Skills</Text>
-					<View style={styles.skillsContainer}>
-						{user.skills.map((skill, index) => (
-							<View key={index} style={styles.skillItem}>
-								<Text style={styles.skillText}>{skill}</Text>
-							</View>
-						))}
-					</View>
-				</View>
+        <View style={styles.sectionContainer}>
+          <Text style={styles.sectionTitle}>{t('skills')}</Text>
+          <View style={styles.skillsContainer}>
+            {user.skills.map((skill, index) => (
+              <View key={index} style={styles.skillItem}>
+                <Text style={styles.skillText}>{skill}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
 
-				<View style={styles.sectionContainerEnd}>
-					<Text style={styles.sectionTitle}>Comments</Text>
+        <View style={styles.sectionContainerEnd}>
+          <Text style={styles.sectionTitle}>{t('comments')}</Text>
 
-					<View style={styles.addCommentContainer}>
-						<TextInput
-							style={styles.commentInput}
-							placeholder="Add a comment..."
-							value={newComment}
-							onChangeText={setNewComment}
-							multiline
-						/>
-						<View style={styles.ratingInput}>
-							{[1, 2, 3, 4, 5].map((star) => (
-								<Pressable key={star} onPress={() => setNewRating(star)}>
-									<Ionicons
-										name={star <= newRating ? "star" : "star-outline"}
-										size={24}
-										color="#FFD700"
-									/>
-								</Pressable>
-							))}
-						</View>
-						<Pressable style={styles.addButton} onPress={addComment}>
-							<Text style={styles.addButtonText}>Add Comment</Text>
-						</Pressable>
-					</View>
+          <View style={styles.addCommentContainer}>
+            <TextInput
+              style={styles.commentInput}
+              placeholder={t('details_add_comment')}
+              value={newComment}
+              onChangeText={setNewComment}
+              multiline
+            />
+            <View style={styles.ratingInput}>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Pressable key={star} onPress={() => setNewRating(star)}>
+                  <Ionicons
+                    name={star <= newRating ? "star" : "star-outline"}
+                    size={24}
+                    color="#FFD700"
+                  />
+                </Pressable>
+              ))}
+            </View>
+            <Pressable style={styles.addButton} onPress={addComment}>
+              <Text style={styles.addButtonText}>{t('details_add_comment_button')}</Text>
+            </Pressable>
+          </View>
 
-					{comments.map((comment, index) => (
-						<View key={index} style={styles.commentItem}>
-							<View style={styles.commentHeader}>
-								<View style={styles.commentUser}>
-									<Image
-										source={{ uri: comment.avatar }}
-										style={styles.commentAvatar}
-									/>
-									<Text style={styles.commentUserName}>{comment.user}</Text>
-								</View>
-								<View style={styles.ratingContainer}>
-									{[...Array(5)].map((_, i) => (
-										<Ionicons
-											key={i}
-											name={i < comment.rating ? "star" : "star-outline"}
-											size={16}
-											color="#FFD700"
-										/>
-									))}
-								</View>
-							</View>
-							<Text style={styles.commentText}>{comment.comment}</Text>
-							<Text style={styles.timestamp}>
-								{new Date(comment.timestamp).toLocaleString()}
-							</Text>
-						</View>
-					))}
-				</View>
-			</ScrollView>
+          {comments.map((comment, index) => (
+            <View key={index} style={styles.commentItem}>
+              <View style={styles.commentHeader}>
+                <View style={styles.commentUser}>
+                  <Image
+                    source={{ uri: comment.avatar }}
+                    style={styles.commentAvatar}
+                  />
+                  <Text style={styles.commentUserName}>{comment.user}</Text>
+                </View>
+                <View style={styles.ratingContainer}>
+                  {[...Array(5)].map((_, i) => (
+                    <Ionicons
+                      key={i}
+                      name={i < comment.rating ? "star" : "star-outline"}
+                      size={16}
+                      color="#FFD700"
+                    />
+                  ))}
+                </View>
+              </View>
+              <Text style={styles.commentText}>{comment.comment}</Text>
+              <Text style={styles.timestamp}>
+                {new Date(comment.timestamp).toLocaleString()}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </ScrollView>
 
-			<Pressable style={styles.goBackButton} onPress={() => router.back()}>
-				<Ionicons name="arrow-back" size={30} color="#069E2D" />
-			</Pressable>
-		</View>
+      <Pressable style={styles.goBackButton} onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={30} color="#069E2D" />
+      </Pressable>
+    </View>
 	);
 }
 

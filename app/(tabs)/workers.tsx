@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Worker2 from "@/components/support/worker";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
-
+import { useTranslation } from "react-i18next";
 const DATA = [
 	{
 		id: "1a2b3c4d5e6f",
@@ -103,6 +103,7 @@ const DATA = [
 
 
 export default function Workers() {
+	const { t } = useTranslation();
 	const [isFocused, setIsFocused] = useState(false);
 	const handleFocus = () => setIsFocused(true);
 	const handleBlur = () => setIsFocused(false);
@@ -118,7 +119,7 @@ export default function Workers() {
 					<View style={styles.container}>
 						<View style={styles.inputContainer}>
 							<TextInput
-								label="Search"
+								label={t("search")}
 								mode="outlined"
 								outlineColor={isFocused ? "#069E2D" : "black"}
 								activeOutlineColor="#069E2D"

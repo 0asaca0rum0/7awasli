@@ -1,42 +1,31 @@
-import index from "@/app/(tabs)";
-import { AntDesign, FontAwesome, FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
 import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import {
+	AntDesign,
+	FontAwesome,
+	FontAwesome5,
+	FontAwesome6,
+} from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import TabbarButton from "@/components/support/TabbarButton";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-type Icons = {
-	[key: string]:
-	React.ComponentProps<typeof AntDesign>["name"] |
-	React.ComponentProps<typeof FontAwesome>["name"] |
-	React.ComponentProps<typeof FontAwesome5>["name"] |
-	React.ComponentProps<typeof FontAwesome6>["name"]
-	;
+
+
+const routeLabels: { [key: string]: string } = {
+	index: "home",
+	map: "map",
+	profile: "profile",
+	workers: "workers",
 };
 
-const icons: Icons = {
-	index: (props: any) => (
-		<AntDesign name="home" size={24} color="black" {...props} />
-	),
-	map: (props: any) => (
-		<FontAwesome5 name="map" size={24} color="black" {...props} />
-	),
-	profile: (props: any) => (
-		<FontAwesome5 name="user" size={24} color="black" {...props} />
-	),
-	settings: (props: any) => (
-		<FontAwesome6 name="cog" size={24} color="black" {...props} />
-	),
-};
-export default function MyTabBar({ state, descriptors, navigation }: any) {
+export default function MyTabBar({ state, descriptors, navigation }:any) {
+	const { t } = useTranslation();
+
 	return (
 		<View style={styles.tabBar}>
-			{state.routes.map((route: any, index: any) => {
+			{state.routes.map((route:any, index:any) => {
 				const { options } = descriptors[route.key];
-				const label =
-					options.tabBarLabel !== undefined
-						? options.tabBarLabel
-						: options.title !== undefined
-						? options.title
-						: route.name;
+				const labelKey = routeLabels[route.name];
+				const label = t(labelKey);
 
 				const isFocused = state.index === index;
 
@@ -58,30 +47,28 @@ export default function MyTabBar({ state, descriptors, navigation }: any) {
 						target: route.key,
 					});
 				};
-					return ( <TabbarButton
-												key={route.key}
-												isFocused={isFocused}
-												routename={route.name}
-												color={isFocused ? "#069E2D" : "black"}
-												label={label}
-						
+
+				return (
+					<TabbarButton
+						key={route.key}
+						isFocused={isFocused}
+						routename={route.name}
+						color={isFocused ? "#069E2D" : "black"}
+						label={label}
 						onPress={onPress}
 						onLongPress={onLongPress}
-						> 
-
-					<Text
+					>
+						<Text
 							style={{
 								color: isFocused ? "#069E2D" : "black",
 								flexDirection: "column",
 							}}
 						>
-							{" "}
 							{label}
 						</Text>
-						</TabbarButton>
-
-			)}
-			)}
+					</TabbarButton>
+				);
+			})}
 		</View>
 	);
 }

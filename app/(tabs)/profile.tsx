@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	View,
 	Text,
@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const profileData = {
 	name: "Elmasri ahmed",
@@ -55,116 +58,161 @@ const profileData = {
 		},
 	],
 };
-
+const langs = ["en","fr","ar"]
 export default function Profile() {
-	return (
-		<ScrollView style={styles.container}>
-			<View style={styles.header}>
-				<View style={styles.info}>
-					<Image source={{ uri: profileData.avatar }} style={styles.avatar} />
-					<View style={styles.headerText}>
-						<Text style={styles.name}>{profileData.name}</Text>
-						<Text style={styles.role}>{profileData.role}</Text>
+	const [lang, setLang] = useState("");
+
+	useEffect(() => {
+		const loadLang = async () => {
+			try {
+				const savedLang = await AsyncStorage.getItem("appLanguage");
+				if (savedLang && langs.includes(savedLang)) {
+					setLang(savedLang);
+					i18next.changeLanguage(savedLang);
+				}
+			} catch (error) {
+				console.error("Failed to load language from AsyncStorage", error);
+			}
+		};
+		loadLang();
+	}, []);
+
+	useEffect(() => {
+		const saveLang = async () => {
+			try {
+				await AsyncStorage.setItem("appLanguage", lang);
+				i18next.changeLanguage(lang);
+			} catch (error) {
+				console.error("Failed to save language to AsyncStorage", error);
+			}
+		};
+		if (lang) {
+			saveLang();
+		}
+	}, [lang]);
+
+	const handleLang = () => {
+		const nextLang =
+			lang === langs[0] ? langs[1] : lang === langs[1] ? langs[2] : langs[0];
+		setLang(nextLang);
+	};
+
+	const { t } = useTranslation();
+return (
+	<ScrollView style={styles.container}>
+		<View style={styles.header}>
+			<View style={styles.info}>
+				<Image source={{ uri: profileData.avatar }} style={styles.avatar} />
+				<View style={styles.headerText}>
+					<Text style={styles.name}>{profileData.name}</Text>
+					<Text style={styles.role}>{t(profileData.role)}</Text>
+					<View style={styles.ratingContainer}>
+						<Text style={styles.rating}>{profileData.rating}</Text>
+						{[...Array(5)].map((_, i) => (
+							<Ionicons
+								key={i}
+								name={
+									i < Math.floor(profileData.rating) ? "star" : "star-outline"
+								}
+								size={16}
+								color="#FFD700"
+							/>
+						))}
+					</View>
+				</View>
+
+				<View className="items-center justify-center space-y-2 ">
+					<Link href={"/(login)"}>
+						<Ionicons name="log-out-outline" size={24} color="#069E2D" />
+					</Link>
+					<Pressable
+						className="border-2 border-primary p-1 rounded-lg items-center justify-center text-center "
+						onPress={handleLang}
+					>
+						<Text>{lang}</Text>
+					</Pressable>
+				</View>
+			</View>
+			<View style={styles.headerButtons}>
+				<Pressable
+					style={styles.button}
+					onPress={() => console.log("Edit Profile pressed")}
+				>
+					<Ionicons name="pencil-outline" size={24} color="white" />
+					<Text style={styles.buttonText}>{t("edit_profile")}</Text>
+				</Pressable>
+				<Pressable
+					style={styles.buttonOutline}
+					onPress={() => console.log("Share Profile pressed")}
+				>
+					<Ionicons name="share-social-outline" size={24} color="#069E2D" />
+					<Text style={styles.buttonTextInverse}>{t("share_profile")}</Text>
+				</Pressable>
+			</View>
+		</View>
+
+		<View style={styles.sectionContainer}>
+			<Text style={styles.sectionTitle}>{t("contact")}</Text>
+			<View style={styles.contactContainer}>
+				<Pressable style={styles.contactItem}>
+					<Ionicons name="mail-outline" size={24} color="#069E2D" />
+					<Text style={styles.contactText}>{profileData.contact.email}</Text>
+				</Pressable>
+				<Pressable style={styles.contactItem}>
+					<Ionicons name="call-outline" size={24} color="#069E2D" />
+					<Text style={styles.contactText}>{profileData.contact.phone}</Text>
+				</Pressable>
+				<Pressable style={styles.contactItem}>
+					<Ionicons name="location-outline" size={24} color="#069E2D" />
+					<Text style={styles.contactText}>{profileData.contact.location}</Text>
+				</Pressable>
+			</View>
+		</View>
+
+		<View style={styles.bioContainer}>
+			<Text style={styles.bioText}>{profileData.bio}</Text>
+		</View>
+
+		<View style={styles.sectionContainer}>
+			<Text style={styles.sectionTitle}>{t("skills")}</Text>
+			<View style={styles.skillsContainer}>
+				{profileData.skills.map((skill, index) => (
+					<View key={index} style={styles.skillItem}>
+						<Text style={styles.skillText}>{skill}</Text>
+					</View>
+				))}
+			</View>
+		</View>
+
+		<View style={styles.sectionContainerEnd}>
+			<Text style={styles.sectionTitle}>{t("comments")}</Text>
+			{profileData.comments.map((comment, index) => (
+				<View key={index} style={styles.commentItem}>
+					<View style={styles.commentHeader}>
+						<View style={styles.commentUser}>
+							<Image
+								source={{ uri: comment.avatar }}
+								style={styles.commentAvatar}
+							/>
+							<Text style={styles.commentUserName}>{comment.user}</Text>
+						</View>
 						<View style={styles.ratingContainer}>
-							<Text style={styles.rating}>{profileData.rating}</Text>
 							{[...Array(5)].map((_, i) => (
 								<Ionicons
 									key={i}
-									name={
-										i < Math.floor(profileData.rating) ? "star" : "star-outline"
-									}
+									name={i < comment.rating ? "star" : "star-outline"}
 									size={16}
 									color="#FFD700"
 								/>
 							))}
 						</View>
 					</View>
-					<Link href={'login'} >
-						<Ionicons name="log-out-outline" size={24} color="#069E2D" />
-					</Link>
+					<Text style={styles.commentText}>{comment.comment}</Text>
 				</View>
-				<View style={styles.headerButtons}>
-					<Pressable
-						style={styles.button}
-						onPress={() => console.log("Edit Profile pressed")}
-					>
-						<Ionicons name="pencil-outline" size={24} color="white" />
-						<Text style={styles.buttonText}>Edit Profile</Text>
-					</Pressable>
-					<Pressable
-						style={styles.buttonOutline}
-						onPress={() => console.log("Share Profile pressed")}
-					>
-						<Ionicons name="share-social-outline" size={24} color="#069E2D" />
-						<Text style={styles.buttonTextInverse}>Share Profile</Text>
-					</Pressable>
-				</View>
-			</View>
-
-			<View style={styles.sectionContainer}>
-				<Text style={styles.sectionTitle}>Contact</Text>
-				<View style={styles.contactContainer}>
-					<Pressable style={styles.contactItem}>
-						<Ionicons name="mail-outline" size={24} color="#069E2D" />
-						<Text style={styles.contactText}>{profileData.contact.email}</Text>
-					</Pressable>
-					<Pressable style={styles.contactItem}>
-						<Ionicons name="call-outline" size={24} color="#069E2D" />
-						<Text style={styles.contactText}>{profileData.contact.phone}</Text>
-					</Pressable>
-					<Pressable style={styles.contactItem}>
-						<Ionicons name="location-outline" size={24} color="#069E2D" />
-						<Text style={styles.contactText}>
-							{profileData.contact.location}
-						</Text>
-					</Pressable>
-				</View>
-			</View>
-
-			<View style={styles.bioContainer}>
-				<Text style={styles.bioText}>{profileData.bio}</Text>
-			</View>
-
-			<View style={styles.sectionContainer}>
-				<Text style={styles.sectionTitle}>Skills</Text>
-				<View style={styles.skillsContainer}>
-					{profileData.skills.map((skill, index) => (
-						<View key={index} style={styles.skillItem}>
-							<Text style={styles.skillText}>{skill}</Text>
-						</View>
-					))}
-				</View>
-			</View>
-
-			<View style={styles.sectionContainerEnd}>
-				<Text style={styles.sectionTitle}>Comments</Text>
-				{profileData.comments.map((comment, index) => (
-					<View key={index} style={styles.commentItem}>
-						<View style={styles.commentHeader}>
-							<View style={styles.commentUser}>
-								<Image
-									source={{ uri: comment.avatar }}
-									style={styles.commentAvatar}
-								/>
-								<Text style={styles.commentUserName}>{comment.user}</Text>
-							</View>
-							<View style={styles.ratingContainer}>
-								{[...Array(5)].map((_, i) => (
-									<Ionicons
-										key={i}
-										name={i < comment.rating ? "star" : "star-outline"}
-										size={16}
-										color="#FFD700"
-									/>
-								))}
-							</View>
-						</View>
-						<Text style={styles.commentText}>{comment.comment}</Text>
-					</View>
-				))}
-			</View>
-		</ScrollView>
-	);
+			))}
+		</View>
+	</ScrollView>
+);
 }
 
 const styles = StyleSheet.create({

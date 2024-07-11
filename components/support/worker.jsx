@@ -4,11 +4,13 @@ import { MaterialIcons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Octicons from '@expo/vector-icons/Octicons';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 
 export default function Worker2({ item }) {
+  const { t } = useTranslation();
   const router = useRouter();
+
   return (
-    
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.avatarContainer}>
@@ -19,13 +21,17 @@ export default function Worker2({ item }) {
         </View>
         <View style={styles.infoContainer}>
           <View style={styles.nameRatingContainer}>
-            <Text style={styles.textName} numberOfLines={1}>{item.username}</Text>
+            <Text style={styles.textName} numberOfLines={1}>
+              {item.username}
+            </Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.textRating}>{item.rating}</Text>
               <Ionicons name="star" color="#FFA500" size={14} />
             </View>
           </View>
-          <Text style={styles.textEmail} numberOfLines={1}>{item.email}</Text>
+          <Text style={styles.textEmail} numberOfLines={1}>
+            {item.email}
+          </Text>
           <Text style={styles.textPhone}>{item.number}</Text>
         </View>
       </View>
@@ -33,18 +39,15 @@ export default function Worker2({ item }) {
       <View style={styles.actionsContainer}>
         <Pressable style={styles.actionButton} onPress={() => router.push(`/chat/${item.id}`)}>
           <Ionicons name="chatbox-outline" size={24} color="#069E2D" />
-          <Text style={styles.actionText}>Message</Text>
+          <Text style={styles.actionText}>{t('message')}</Text>
         </Pressable>
         <Pressable style={styles.actionButton} onPress={() => console.log('Locate pressed')}>
           <Octicons name="location" size={24} color="#069E2D" />
-          <Text style={styles.actionText}>Locate</Text>
+          <Text style={styles.actionText}>{t('locate')}</Text>
         </Pressable>
-        <Pressable
-          style={styles.actionButton}
-          onPress={() => router.push(`/profile/${item.id}`)}
-        >
+        <Pressable style={styles.actionButton} onPress={() => router.push(`/profile/${item.id}`)}>
           <FontAwesome5 name="user" size={22} color="#069E2D" style={styles.actionIcon} />
-          <Text style={styles.actionText}>See User</Text>
+          <Text style={styles.actionText}>{t('see_user')}</Text>
         </Pressable>
       </View>
     </View>
@@ -150,5 +153,4 @@ const styles = StyleSheet.create({
     color: '#333',
     marginLeft: 8,
   },
-
 });
